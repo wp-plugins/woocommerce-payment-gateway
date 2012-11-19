@@ -12,7 +12,7 @@ Accept all major credit cards directly on your WooCommerce site in a seamless an
 
 == Description ==
 
-Inspire Commerce is the all-in-one solution that allows you to turn your beautiful WooCommerce backed shopping experience into a selling machine.  This plugin combined with a merchant account from Inspire Commerce will allow you to accept transactions from all major credit cards including Visa, MasterCard, American Express, Discover, Diners Club, and JCB.  
+Inspire Commerce is the all-in-one solution that allows you to turn your beautiful WooCommerce backed shopping experience into a selling machine.  This plugin, combined with a merchant account from Inspire Commerce, will allow you to accept transactions from all major credit cards including Visa, MasterCard, American Express, Discover, Diners Club, and JCB.  
 
 This plugin supports both card storage as well as integration with the WooCommerce subscriptions module.  Inspire Commerce meets the highest standards of security and reliability and is proudly PCI Level 1 compliant.  
 
@@ -59,8 +59,10 @@ __Note: This plugin requires that you have an SSL certificate installed and act
 * Click on ‘User Accounts’
 * Select ‘Click Here to Add a New User Account’
 * Enter in the User Information (Name, Email Address, Username)
-* * __Email__ – enter an email address that you have access to
-* * __Username__ – this will be the API username to connect to your Woo Commerce settings panel.  We recommend a username like ‘yourbusinessapi’
+
+> * __Email__ – enter an email address that you have access to
+> * __Username__ – this will be the API username to connect to your Woo Commerce settings panel.  We recommend a username like ‘yourbusinessapi’
+
 * An email will be sent to you.  Please follow the instructions to set up your password.
 * Copy your API username and password to your Woo Commerce settings panel and save.
 
