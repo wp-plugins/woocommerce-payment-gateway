@@ -58,8 +58,8 @@ __Note: This plugin requires that you have an SSL certificate installed and act
 * Click on “Options” in the navigation menu
 * Click on ‘User Accounts’
 * Select ‘Click Here to Add a New User Account’
-* Enter in the User Information (Name, Email Address, Username)
 
+> * Enter in the User Information (Name, Email Address, Username)
 > * __Email__ – enter an email address that you have access to
 > * __Username__ – this will be the API username to connect to your Woo Commerce settings panel.  We recommend a username like ‘yourbusinessapi’
 
