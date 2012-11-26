@@ -1,4 +1,4 @@
-=== WooCommerce Payment Gateway ===
+=== WooCommerce Payment Gateway - Inspire ===
 Contributors: innerfire
 Donate link: http://www.inspirecommerce.com/woocommerce/
 Tags: WooCommerce, Credit Cards, Shopping Cart, Inspire, Inspire Commerce, Extension, Gateway, Subscriptions, Recurring Billing, Membership
@@ -12,9 +12,9 @@ Accept all major credit cards directly on your WooCommerce site in a seamless an
 
 == Description ==
 
-Inspire Commerce is the all-in-one solution that allows you to turn your beautiful WooCommerce backed shopping experience into a selling machine.  This plugin, combined with a merchant account from Inspire Commerce, will allow you to accept transactions from all major credit cards including Visa, MasterCard, American Express, Discover, Diners Club, and JCB.  
+Inspire Commerce is the all-in-one solution that allows you to turn your beautiful WooCommerce backed shopping experience into a selling machine.  This payment gateway plugin, combined with a merchant account from Inspire Commerce, will allow you to accept transactions from all major credit cards including Visa, MasterCard, American Express, Discover, Diners Club, and JCB.  
 
-This plugin supports both card storage as well as integration with the WooCommerce subscriptions module.  Inspire Commerce meets the highest standards of security and reliability and is proudly PCI Level 1 compliant.  
+This WooCommerce payment gateway supports both card storage as well as integration with the WooCommerce subscriptions module.  Inspire Commerce meets the highest standards of security and reliability and is proudly PCI Level 1 compliant.  
 
 Inspire Commerce’s payment gateway plugin is THE plugin used by WooThemes on their website.  Like their checkout experience?  This payment gateway enables you to have a fully branded checkout on your WooCommerce website, just like Ninja’s at WooThemes.
 
