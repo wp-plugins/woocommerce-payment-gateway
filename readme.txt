@@ -14,7 +14,7 @@ Accept all major credit cards directly on your WooCommerce site via this seamles
 
 Inspire Commerce is the all-in-one solution that allows you to turn your beautiful WooCommerce backed shopping experience into a selling machine.  This WooCommerce gateway plugin, combined with a merchant account from Inspire Commerce, will allow you to accept transactions from all major credit cards including Visa, MasterCard, American Express, Discover, Diners Club, and JCB.  
 
-Using Inspire Commerce's innovative and secure [.pay™ payment framework](http://www.getdotpay.com ".pay"), this plugin supports both card storage as well as integration with the WooCommerce subscriptions module.  Inspire Commerce meets the highest standards of security and reliability and is proudly PCI Level 1 compliant.  
+Using Inspire Commerce's innovative and secure [.pay™ developer framework](http://www.getdotpay.com ".pay"), this plugin supports both card storage as well as integration with the WooCommerce subscriptions module.  Inspire Commerce meets the highest standards of security and reliability and is proudly PCI Level 1 compliant.  
 
 This payment plugin is THE plugin used by WooThemes on their website.  Like their checkout experience?  Have a fully branded checkout on your WooCommerce website, just like the Ninja’s at WooThemes.
 
