@@ -1,5 +1,5 @@
 === WooCommerce Payment Gateway - Inspire ===
-Contributors: innerfire
+Contributors: innerfire, CoenJacobs
 Donate link: http://www.inspirecommerce.com/woocommerce/
 Tags: WooCommerce, Credit Cards, Shopping Cart, Inspire, Inspire Commerce, Extension, Gateway, Subscriptions, Recurring Billing, Membership
 Requires at least: 3.0.1
