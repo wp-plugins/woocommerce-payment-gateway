@@ -107,6 +107,15 @@ Yes.  It works as long as the card vault functionality is activated in the gatew
 
 == Changelog ==
 
+= 1.7.2 =
+* Fixed minor UI Bugs
+
+= 1.7.1 =
+* Refactored Vault Functionality
+
+= 1.7 =
+* WooCommerce 2.0 compliant.
+
 = 1.6 =
 * Fixed logic issues with new customers.
 
@@ -136,6 +145,15 @@ Yes.  It works as long as the card vault functionality is activated in the gatew
 * First Release.
 
 == Upgrade Notice ==
+
+= 1.7.2 =
+* Fixed minor UI Bugs
+
+= 1.7.1 =
+* Refactored Vault Functionality
+
+= 1.7 =
+* WooCommerce 2.0 compliant.
 
 = 1.6 =
 * Fixed logic issues with new customers.

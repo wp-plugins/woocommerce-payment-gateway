@@ -4,7 +4,7 @@
  * Plugin Name: WooCommerce Payment Gateway - Inspire
  * Plugin URI: http://www.inspirecommerce.com/woocommerce/
  * Description: Accept all major credit cards directly on your WooCommerce site in a seamless and secure checkout environment with Inspire Commerce.
- * Version: 1.7.1
+ * Version: 1.7.2
  * Author: innerfire
  * Author URI: http://www.inspirecommerce.com/
  * License: GPL version 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
@@ -162,120 +162,111 @@ function woocommerce_inspire_commerce_init() {
 			    <table class="form-table">
 					<?php $this->generate_settings_html(); ?>
 				</table>
-				<?php
-			}
-
-
+			<?php }
       /**
        * UI - Payment page fields for Inspire Commerce.
        */
-      function payment_fields() {
-          // Description of payment method from settings
-          if ( $this->description ) { ?>
-            <p><?php echo $this->description; ?></p>
-      <?php } ?>
+			function payment_fields() {
+          		// Description of payment method from settings
+          		if ( $this->description ) { ?>
+            		<p><?php echo $this->description; ?></p>
+      		<?php } ?>
+			<fieldset  style="padding-left: 40px;">
+		        <?php
+		          $user = wp_get_current_user();
+		          $this->check_payment_method_conversion( $user->user_login, $user->ID );
+		          if ( $this->user_has_stored_data( $user->ID ) ) { ?>
+						<fieldset>
+							<input type="radio" name="inspire-use-stored-payment-info" id="inspire-use-stored-payment-info-yes" value="yes" checked="checked" onclick="document.getElementById('inspire-new-info').style.display='none'; document.getElementById('inspire-stored-info').style.display='block'"; /><label for="inspire-use-stored-payment-info-yes" style="display: inline;"><?php _e( 'Use a stored credit card', 'woocommerce' ) ?></label>
+								<div id="inspire-stored-info" style="padding: 10px 0 0 40px; clear: both;">
+						            <?php
+						              $i = 0;
+						              $method = $this->get_payment_method( $i );
+						              while( $method != null ) {
+						            ?>
+				                    <p>
+				              			<input type="radio" name="inspire-payment-method" id="<?php echo $i; ?>" value="<?php echo $i; ?>" /> &nbsp;
+											<?php echo $method->cc_number; ?> (<?php
+				                                  $exp = $method->cc_exp;
+				                                  echo substr( $exp, 0, 2 ) . '/' . substr( $exp, -2 );
+				              				?>)
+											<br />
+				                    </p>
+				          			<?php
+				                  		$method = $this->get_payment_method( ++$i );
+				                  	} ?>
+						</fieldset>
+						<fieldset>
+							<p>
+								<input type="radio" name="inspire-use-stored-payment-info" id="inspire-use-stored-payment-info-no" value="no" onclick="document.getElementById('inspire-stored-info').style.display='none'; document.getElementById('inspire-new-info').style.display='block'"; />
+		                  		<label for="inspire-use-stored-payment-info-no"  style="display: inline;"><?php _e( 'Use a new payment method', 'woocommerce' ) ?></label>
+		                	</p>
+		                	<div id="inspire-new-info" style="display:none">
+						</fieldset>
+				<?php } else { ?>
+              			<fieldset>
+              				<!-- Show input boxes for new data -->
+              				<div id="inspire-new-info">
+              					<?php } ?>
+								<!-- Credit card number -->
+                    			<p class="form-row form-row-first">
+									<label for="ccnum"><?php echo __( 'Credit Card number', 'woocommerce' ) ?> <span class="required">*</span></label>
+									<input type="text" class="input-text" id="ccnum" name="ccnum" maxlength="16" />
+                    			</p>
+								<!-- Credit card type -->
+                    			<p class="form-row form-row-last">
+                      				<label for="cardtype"><?php echo __( 'Card type', 'woocommerce' ) ?> <span class="required">*</span></label>
+                      				<select name="cardtype" id="cardtype" class="woocommerce-select">
+                  						<?php  foreach( $this->cardtypes as $type ) { ?>
+                            				<option value="<?php echo $type ?>"><?php _e( $type, 'woocommerce' ); ?></option>
+                  						<?php } ?>
+                       				</select>
+                    			</p>
+								<div class="clear"></div>
+								<!-- Credit card expiration -->
+                    			<p class="form-row form-row-first">
+                      				<label for="cc-expire-month"><?php echo __( 'Expiration date', 'woocommerce') ?> <span class="required">*</span></label>
+                      				<select name="expmonth" id="expmonth" class="woocommerce-select woocommerce-cc-month">
+                        				<option value=""><?php _e( 'Month', 'woocommerce' ) ?></option><?php
+				                        $months = array();
+				                        for ( $i = 1; $i <= 12; $i ++ ) {
+				                          $timestamp = mktime( 0, 0, 0, $i, 1 );
+				                          $months[ date( 'n', $timestamp ) ] = date( 'F', $timestamp );
+				                        }
+				                        foreach ( $months as $num => $name ) {
+				                          printf( '<option value="%u">%s</option>', $num, $name );
+				                        } ?>
+                      				</select>
+                      				<select name="expyear" id="expyear" class="woocommerce-select woocommerce-cc-year">
+                        				<option value=""><?php _e( 'Year', 'woocommerce' ) ?></option><?php
+				                        $years = array();
+				                        for ( $i = date( 'y' ); $i <= date( 'y' ) + 15; $i ++ ) {
+				                          printf( '<option value="20%u">20%u</option>', $i, $i );
+				                        } ?>
+                      				</select>
+                    			</p>
+								<?php
 
+				                    // Credit card security code
+				                    if ( $this->cvv == 'yes' ) { ?>
+				                      <p class="form-row form-row-last">
+				                        <label for="cvv"><?php _e( 'Card security code', 'woocommerce' ) ?> <span class="required">*</span></label>
+				                        <input oninput="validate_cvv(this.value)" type="text" class="input-text" id="cvv" name="cvv" maxlength="4" style="width:45px" />
+				                        <span class="help"><?php _e( '3 or 4 digits usually found on the signature strip.', 'woocommerce' ) ?></span>
+				                      </p><?php
+				                    }
 
-      <fieldset  style="padding-left: 40px;">
-        <?php
-          $user = wp_get_current_user();
-          $this->check_payment_method_conversion( $user->user_login, $user->ID );
-          if ( $this->user_has_stored_data( $user->ID ) ) {
-        ?>
-          <fieldset>
-          <input type="radio" name="inspire-use-stored-payment-info" id="inspire-use-stored-payment-info-yes" value="yes" checked="checked" onclick="document.getElementById('inspire-new-info').style.display='none'; document.getElementById('inspire-stored-info').style.display='block'"; /><label for="inspire-use-stored-payment-info-yes" style="display: inline;"><?php _e( 'Use a stored credit card', 'woocommerce' ) ?></label>
-				<div id="inspire-stored-info" style="padding: 10px 0 0 40px; clear: both;">
-            <?php
-              $i = 0;
-              $method = $this->get_payment_method( $i );
-              while( $method != null ) {
-            ?>
-                    <p>
-              <input type="radio" name="inspire-payment-method" id="<?php echo $i; ?>" value="<?php echo $i; ?>" /> &nbsp;<?php echo $method->cc_number; ?> (<?php
-                                  $exp = $method->cc_exp;
-                                  echo substr( $exp, 0, 2 ) . '/' . substr( $exp, -2 );
-              ?>)<br />
-                    </p>
-          <?php
-                  $method = $this->get_payment_method( ++$i );
-                  } ?>
-        </fieldset>
-
-
-        <fieldset>
-                <p>
-                  <input type="radio" name="inspire-use-stored-payment-info" id="inspire-use-stored-payment-info-no" value="no"
-                  onclick="document.getElementById('inspire-stored-info').style.display='none'; document.getElementById('inspire-new-info').style.display='block'"; />
-                  <label for="inspire-use-stored-payment-info-no"  style="display: inline;"><?php _e( 'Use a new payment method', 'woocommerce' ) ?></label>
-                </p>
-                <div id="inspire-new-info" style="display:none">
-            <?php } else { ?>
-              <fieldset>
-              <!-- Show input boxes for new data -->
-              <div id="inspire-new-info">
-              <?php } ?>
-
-                    <!-- Credit card number -->
-                    <p class="form-row form-row-first">
-                        <label for="ccnum"><?php echo __( 'Credit Card number', 'woocommerce' ) ?> <span class="required">*</span></label>
-                        <input type="text" class="input-text" id="ccnum" name="ccnum" maxlength="16" />
-                    </p>
-
-                    <!-- Credit card type -->
-                    <p class="form-row form-row-last">
-                      <label for="cardtype"><?php echo __( 'Card type', 'woocommerce' ) ?> <span class="required">*</span></label>
-                      <select name="cardtype" id="cardtype" class="woocommerce-select">
-                  <?php  foreach( $this->cardtypes as $type ) { ?>
-                            <option value="<?php echo $type ?>"><?php _e( $type, 'woocommerce' ); ?></option>
-                  <?php } ?>
-                       </select>
-                    </p>
-
-                    <div class="clear"></div>
-
-                    <!-- Credit card expiration -->
-                    <p class="form-row form-row-first">
-                      <label for="cc-expire-month"><?php echo __( 'Expiration date', 'woocommerce') ?> <span class="required">*</span></label>
-                      <select name="expmonth" id="expmonth" class="woocommerce-select woocommerce-cc-month">
-                        <option value=""><?php _e( 'Month', 'woocommerce' ) ?></option><?php
-                        $months = array();
-                        for ( $i = 1; $i <= 12; $i ++ ) {
-                          $timestamp = mktime( 0, 0, 0, $i, 1 );
-                          $months[ date( 'n', $timestamp ) ] = date( 'F', $timestamp );
-                        }
-                        foreach ( $months as $num => $name ) {
-                          printf( '<option value="%u">%s</option>', $num, $name );
-                        } ?>
-                      </select>
-                      <select name="expyear" id="expyear" class="woocommerce-select woocommerce-cc-year">
-                        <option value=""><?php _e( 'Year', 'woocommerce' ) ?></option><?php
-                        $years = array();
-                        for ( $i = date( 'y' ); $i <= date( 'y' ) + 15; $i ++ ) {
-                          printf( '<option value="20%u">20%u</option>', $i, $i );
-                        } ?>
-                      </select>
-                    </p><?php
-
-                    // Credit card security code
-                    if ( $this->cvv == 'yes' ) { ?>
-                      <p class="form-row form-row-last">
-                        <label for="cvv"><?php _e( 'Card security code', 'woocommerce' ) ?> <span class="required">*</span></label>
-                        <input oninput="validate_cvv(this.value)" type="text" class="input-text" id="cvv" name="cvv" maxlength="4" style="width:45px" />
-                        <span class="help"><?php _e( '3 or 4 digits usually found on the signature strip.', 'woocommerce' ) ?></span>
-                      </p><?php
-                    }
-
-                    // Option to store credit card data
-                    if ( $this->saveinfo == 'yes' && ! ( class_exists( 'WC_Subscriptions_Cart' ) && WC_Subscriptions_Cart::cart_contains_subscription() ) ) { ?>
-                      <p class="form-row form-row-last">
-                        <label for="saveinfo"><?php _e( 'Save this billing method?', 'woocommerce' ) ?></label>
-                        <input type="checkbox" class="input-checkbox" id="saveinfo" name="saveinfo" />
-                        <span class="help"><?php _e( 'Select to store your billing information for future use.', 'woocommerce' ) ?></span>
-                      </p><?php
-                    } ?>
-            </fieldset>
-              </div>
-        </fieldset>
+			                    // Option to store credit card data
+			                    if ( $this->saveinfo == 'yes' && ! ( class_exists( 'WC_Subscriptions_Cart' ) && WC_Subscriptions_Cart::cart_contains_subscription() ) ) { ?>
+			                      	<div style="clear: both;"></div>
+										<p>
+			                        		<label for="saveinfo"><?php _e( 'Save this billing method?', 'woocommerce' ) ?></label>
+			                        		<input type="checkbox" class="input-checkbox" id="saveinfo" name="saveinfo" />
+			                        		<span class="help"><?php _e( 'Select to store your billing information for future use.', 'woocommerce' ) ?></span>
+			                      		</p>
+									<?php  } ?>
+            			</fieldset>
+			</fieldset>
 <?php
     }
 
