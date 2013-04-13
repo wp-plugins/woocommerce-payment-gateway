@@ -4,7 +4,7 @@
  * Plugin Name: WooCommerce Payment Gateway - Inspire
  * Plugin URI: http://www.inspirecommerce.com/woocommerce/
  * Description: Accept all major credit cards directly on your WooCommerce site in a seamless and secure checkout environment with Inspire Commerce.
- * Version: 1.7.2
+ * Version: 1.7.3
  * Author: innerfire
  * Author URI: http://www.inspirecommerce.com/
  * License: GPL version 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
@@ -304,16 +304,17 @@ function woocommerce_inspire_commerce_init() {
         // Full request, new customer or new information
         $base_request = array (
           'ccnumber' 	=> $this->get_post( 'ccnum' ),
-          'cvv' 		  => $this->get_post( 'cvv' ),
+          'cvv' 		=> $this->get_post( 'cvv' ),
           'ccexp' 		=> $expmonth . $expyear,
-          'firstname' => $order->billing_first_name,
+          'firstname'   => $order->billing_first_name,
           'lastname' 	=> $order->billing_last_name,
           'address1' 	=> $order->billing_address_1,
-          'city' 			=> $order->billing_city,
+          'city' 	    => $order->billing_city,
           'state' 		=> $order->billing_state,
-          'zip' 			=> $order->billing_postcode,
+          'zip' 		=> $order->billing_postcode,
           'country' 	=> $order->billing_country,
           'phone' 		=> $order->billing_phone,
+          'email'       => $order->billing_email,
           );
 
         // If "save billing data" box is checked or order is a subscription, also request storage of customer payment information.

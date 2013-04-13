@@ -107,6 +107,9 @@ Yes.  It works as long as the card vault functionality is activated in the gatew
 
 == Changelog ==
 
+= 1.7.3 =
+* Billing email now sends to gateway
+
 = 1.7.2 =
 * Fixed minor UI Bugs
 
@@ -145,6 +148,9 @@ Yes.  It works as long as the card vault functionality is activated in the gatew
 * First Release.
 
 == Upgrade Notice ==
+
+= 1.7.3 =
+* Billing email now sends to gateway
 
 = 1.7.2 =
 * Fixed minor UI Bugs
