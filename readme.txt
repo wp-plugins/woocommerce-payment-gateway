@@ -33,7 +33,7 @@ At this time, because of the complexity of international credit card processing,
 * __Receive Payments Quickly__ – Your funds are automatically deposited into your merchant bank account with two business day.
 * __Free Help__ – Inspire Commerce provides free technical and account support to merchants, as well as access to online documentation and user guides.
 
-= Value Added Features =
+= Value Added Feature =
 * __Mobile Payments__ - Easily accept credit cards on the go, at trade shows, in store, or at festivals year round.  All processing data is synchronized for consolidated reporting and accounting.
 
 __Note: This extension requires an SSL Certificate to be installed on your site to ensure your customer’s credit card details are safe.__
