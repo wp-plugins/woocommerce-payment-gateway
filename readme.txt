@@ -30,7 +30,7 @@ At this time, because of the complexity of international credit card processing,
 * Accept __all major credit cards__
 * __Prevent Fraud__ – Identify suspicious transactions with our value added products and built-in fraud tools.
 * __Risk Management__ – Our gateway is PCI Level 1 compliant (geek for secure as hell).  So all card data is stored securely.
-* __Receive Payments Quickly__ – Your funds are automatically deposited into your merchant bank account with two business day.
+* __Receive Payments Quickly__ – Your funds are automatically deposited into your merchant bank account within two business day.
 * __Free Help__ – Inspire Commerce provides free technical and account support to merchants, as well as access to online documentation and user guides.
 
 = Value Added Feature =
