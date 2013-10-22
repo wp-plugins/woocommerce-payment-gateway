@@ -1,10 +1,10 @@
 === WooCommerce Payment Gateway - Inspire ===
 Contributors: innerfire, CoenJacobs, warrenholmes
 Donate link: http://www.inspirecommerce.com/woocommerce/
-Tags: WooCommerce, Credit Cards, Shopping Cart, Inspire, Inspire Commerce, Extension, Gateway, Subscriptions, Recurring Billing, Membership
-Requires at least: 3.0.1
-Tested up to: 3.5.1
-Stable tag: 1.6
+Tags: WooCommerce, Payment, Gateway, Credit Cards, Shopping Cart, Inspire, Inspire Commerce, Extension, Subscriptions, Recurring Billing, Membership
+Requires at least: 3.0.0
+Tested up to: 3.6.1
+Stable tag: 1.6.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,17 +12,17 @@ Accept all major credit cards directly on your WooCommerce site via this seamles
 
 == Description ==
 
-Inspire Commerce is the all-in-one solution that allows you to turn your beautiful WooCommerce backed shopping experience into a selling machine.  This WooCommerce gateway plugin, combined with a merchant account from Inspire Commerce, will allow you to accept transactions from all major credit cards including Visa, MasterCard, American Express, Discover, Diners Club, and JCB.  
+Inspire Commerce is the all-in-one solution that allows you to turn your beautiful WooCommerce backed shopping experience into a selling machine.  This WooCommerce gateway plugin, combined with a [merchant account](http://www.inspirecommerce.com/woocommerce/ "merchant account") from Inspire Commerce, will allow you to accept transactions from all major credit cards including Visa, MasterCard, American Express, Discover, Diners Club, and JCB.  
 
-Using Inspire Commerce's innovative and secure [.pay™ developer framework](http://www.getdotpay.com ".pay"), this plugin supports both card storage as well as integration with the WooCommerce subscriptions module.  Inspire Commerce meets the highest standards of security and reliability and is proudly PCI Level 1 compliant.  
+Using Inspire Commerce's innovative and secure [.pay™ developer framework](http://www.getdotpay.com ".pay"), this plugin supports both card storage as well as integration with the WooCommerce subscriptions module.  Inspire Commerce meets the highest standards of security and reliability and is PCI Level 1 compliant.  
 
-This payment plugin is THE plugin used by WooThemes on their website.  Like their checkout experience?  Have a fully branded checkout on your WooCommerce website, just like the Ninja’s at WooThemes.
+This payment plugin is THE plugin used by WooThemes on their website.  Like their checkout experience?  Have a fully branded checkout on your WooCommerce website, just like the ninjas at WooThemes.
 
 = For US Based Merchants =
-You will need to setup a [credit card processing account with Inspire Commerce](http://www.inspirecommerce.com/woocommerce/ "credit card processing account with Inspire Commerce").  This account will allow you to accept payments from anyone in the world using all major card brands.  There is no minimum volume for US based merchants.  Account setup typically takes two to three business days.  Details are available on the [Inspire Commerce website](http://www.inspirecommerce.com/woocommerce/ "Inspire Commerce website").
+You will need to setup a [credit card processing account with Inspire Commerce](http://www.inspirecommerce.com/woocommerce/ "credit card processing account with Inspire Commerce").  This account will allow you to accept payments from anyone in the world using all major card brands.  There is no processing minimum volume for US based merchants.  Account setup typically takes two to three business days.  Details are available on the [Inspire Commerce website](http://www.inspirecommerce.com/woocommerce/ "Inspire Commerce website").
 
 = For Merchants outside of the US =
-At this time, because of the complexity of international credit card processing, we are only accepting applicants for merchants that process over $20,000 USD per month for the WooCommerce Payment Gateway.  We can handle processing in most currencies throughout the world, but do require European business registration in most cases.  Please contact [Inspire Commerce](http://www.inspirecommerce.com "Inspire Commerce") for more information.
+At this time, because of the complexity of international credit card processing, we are only accepting applicants for merchants that process over $40,000 USD per month for the WooCommerce Payment Gateway.  We can handle processing in most currencies throughout the world, but do require European business registration in most cases.  Please contact [Inspire Commerce](http://www.inspirecommerce.com/contact-us/ "Inspire Commerce") for more information.
 
 = Key Features =
 * __Seamless integration__ into the WooCommerce checkout page.
@@ -30,7 +30,7 @@ At this time, because of the complexity of international credit card processing,
 * Accept __all major credit cards__
 * __Prevent Fraud__ – Identify suspicious transactions with our value added products and built-in fraud tools.
 * __Risk Management__ – Our gateway is PCI Level 1 compliant (geek for secure as hell).  So all card data is stored securely.
-* __Receive Payments Quickly__ – Your funds are automatically deposited into your merchant bank account with next day funding.
+* __Receive Payments Quickly__ – Your funds are automatically deposited into your merchant bank account with two business day.
 * __Free Help__ – Inspire Commerce provides free technical and account support to merchants, as well as access to online documentation and user guides.
 
 = Value Added Features =
@@ -53,18 +53,7 @@ __Note: This extension requires an SSL Certificate to be installed on your site 
 __Note: This plugin requires that you have an SSL certificate installed and active on your site.__
 
 = Obtain Credentials from Inspire Commerce Gateway =
-* To setup your Inspire Commerce Gateway you will need to enter your API Username and Password.
-* Login to your Inspire Commerce Gateway account: https://www.inspirecommerce.com/inspire-gateway-login
-* Click on “Options” in the navigation menu
-* Click on ‘User Accounts’
-* Select ‘Click Here to Add a New User Account’
-
-> * Enter in the User Information (Name, Email Address, Username)
-> * __Email__ – enter an email address that you have access to
-> * __Username__ – this will be the API username to connect to your Woo Commerce settings panel.  We recommend a username like ‘yourbusinessapi’
-
-* An email will be sent to you.  Please follow the instructions to set up your password.
-* Copy your API username and password to your Woo Commerce settings panel and save.
+To setup your Inspire Commerce Gateway you will need to enter your account Username and Password.
 
 = Connect to WooCommerce =
 To configure the plugin, go to __WooCommerce > Settings__ from the left hand menu, then the top tab “Payment Gateways”. You should see __"Inspire"__ as an option at the top of the screen. 
@@ -75,7 +64,8 @@ __*You can select the radio button next to this option to make it the default ga
 * __Description__  – controls the message that appears under the payment fields on the checkout page. Here you can list the types of cards you accept. 
 * __Username__  – enter the API username you created in your Inspire Commerce Gateway account. 
 * __Password__  – enter the API password you created 
-* __Sale Method__  – select the sale method you prefer – your options are: ‘Authorize Only’ or ‘Authorize & Capture.  ‘Authorize Only’ will authorize the customer’s card for the purchase amount only.  ‘Authorize & Capture’ will authorize the customer’s card and collect funds.  
+* __Sale Method__  – select the sale method you prefer – your options are: ‘Authorize Only’ or ‘Authorize & Capture.  ‘Authorize Only’ will authorize the customer’s card for the purchase amount only.  ‘Authorize & Capture’ will authorize the customer’s card and collect funds.
+* __Card Types__  - make sure to highlight all the credit card options in blue (using either the shift or control button) 
 * __CVV__  – check the box to require customers to enter their credit card CVV code
 * __Billing Information Storage__  – this is an optional feature of the gateway.  In order to use this feature you will have to sign up for our Customer Vault.
 * __Save Changes.__ 
@@ -98,9 +88,6 @@ This plugin is a FREE download, however it does have monthly and per transaction
 
 = Inspire Commerce is not showing up as a payment method - help! =
 For security purposes, this plugin requires an active SSL connection via a secure https page to view this option on your payment pages.
-
-= I’m getting an API error: =
-Double check your username and password entered into the Settings page and that it matches your login credentials.  If your credentials are correct and you are still receiving this message, please contact Inspire Commerce at 800-261-3173
 
 = Does the plugin work with the WooCommerce subscription extension? =
 Yes.  It works as long as the card vault functionality is activated in the gateway, and is turned on inside the WooCommerce payment gateways settings for Inspire Commerce.
