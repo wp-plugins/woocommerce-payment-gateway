@@ -35,7 +35,6 @@ At this time, because of the complexity of international credit card processing,
 
 = Value Added Features =
 * __Mobile Payments__ - Easily accept credit cards on the go, at trade shows, in store, or at festivals year round.  All processing data is synchronized for consolidated reporting and accounting.
-* __QuickBooks Integration__ - Pay invoices, generate sales receipts, process batch transactions, and view batch reports without ever leaving QuickBooks.  Perfect for merchants that need to handle both wholesale and retail sales.
 
 __Note: This extension requires an SSL Certificate to be installed on your site to ensure your customer’s credit card details are safe.__
 
