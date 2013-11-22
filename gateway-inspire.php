@@ -4,7 +4,7 @@
  * Plugin Name: WooCommerce Payment Gateway - Inspire
  * Plugin URI: http://www.inspirecommerce.com/woocommerce/
  * Description: Accept all major credit cards directly on your WooCommerce site in a seamless and secure checkout environment with Inspire Commerce.
- * Version: 1.7.3
+ * Version: 1.7.4
  * Author: innerfire
  * Author URI: http://www.inspirecommerce.com/
  * License: GPL version 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
@@ -277,7 +277,7 @@ function woocommerce_inspire_commerce_init() {
 
 			global $woocommerce;
 
-			$order = &new WC_Order( $order_id );
+			$order = new WC_Order( $order_id );
       $user = new WP_User( $order->user_id );
       $this->check_payment_method_conversion( $user->user_login, $user->ID );
 
