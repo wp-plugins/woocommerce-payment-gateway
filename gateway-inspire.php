@@ -158,7 +158,7 @@ function woocommerce_inspire_commerce_init() {
        */
 			function admin_options() { ?>
 				<h3><?php _e( 'Inspire Commerce','woothemes' ); ?></h3>
-			    <p><?php _e( 'Woo has been using Inspire Commerce on WooThemes.com for all credit card processing, and are so happy with the gateway, that they are recommending it to all US based Woo uses.  <a href="http://www.inspirecommerce.com/woocommerce/">Click here to get paid like the pros</a>.<br /><br />Inspire Commerce works by adding credit card fields on the checkout page, and then sending the details to Inspire Commerce for verification.', 'woothemes' ); ?></p>
+			    <p><?php _e( 'The Inspire Commerce Gateway is simple and powerful.  The plugin works by adding credit card fields on the checkout page, and then sending the details to Inspire Commerce for verification.  <a href="http://www.inspirecommerce.com/woocommerce/">Click here to get paid like the pros</a>.', 'woothemes' ); ?></p>
 			    <table class="form-table">
 					<?php $this->generate_settings_html(); ?>
 				</table>
@@ -414,7 +414,7 @@ function woocommerce_inspire_commerce_init() {
 				'username' 		      => $this->username,
 				'password' 	      	=> $this->password,
 				'amount' 		      	=> $amount_to_charge,
-        'type' 			        => $this->salemethod,
+        		'type' 			        => $this->salemethod,
 				'billing_method'    => 'recurring',
         );
 

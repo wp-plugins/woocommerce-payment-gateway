@@ -3,8 +3,8 @@ Contributors: innerfire, CoenJacobs, warrenholmes
 Donate link: http://www.inspirecommerce.com/woocommerce/
 Tags: WooCommerce, Payment, Gateway, Credit Cards, Shopping Cart, Inspire, Inspire Commerce, Extension, Subscriptions, Recurring Billing, Membership
 Requires at least: 3.0.0
-Tested up to: 3.6.1
-Stable tag: 1.6.1
+Tested up to: 3.9
+Stable tag: 1.7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
