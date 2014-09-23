@@ -4,7 +4,7 @@
  * Plugin Name: WooCommerce Payment Gateway - Inspire
  * Plugin URI: http://www.inspirecommerce.com/woocommerce/
  * Description: Accept all major credit cards directly on your WooCommerce site in a seamless and secure checkout environment with Inspire Commerce.
- * Version: 1.7.4
+ * Version: 1.7.5
  * Author: innerfire
  * Author URI: http://www.inspirecommerce.com/
  * License: GPL version 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
@@ -37,12 +37,15 @@ function woocommerce_inspire_commerce_init() {
 	      $this->id			    = 'inspire';
 	      $this->has_fields = true;
 	      $this->supports   = array(
-               'products',
+               'products', 
                'subscriptions',
-               'subscription_cancellation',
-               'subscription_suspension',
+               'subscription_cancellation', 
+               'subscription_suspension', 
                'subscription_reactivation',
+               'subscription_amount_changes',
                'subscription_date_changes',
+               'subscription_payment_method_change',
+               'refunds'
                );
 
         // Create plugin fields and settings
@@ -65,6 +68,70 @@ function woocommerce_inspire_commerce_init() {
 				add_action( 'scheduled_subscription_payment_inspire',                   array( $this, 'process_scheduled_subscription_payment'), 0, 3 );
 
 		  }
+
+     /**
+       * Process a refund if supported
+       * @param  int $order_id
+       * @param  float $amount
+       * @param  string $reason
+       * @return  bool|wp_error True or false based on success, or a WP_Error object
+       */
+      public function process_refund( $order_id, $amount = null, $reason = '' ) {
+        $order = wc_get_order( $order_id );
+
+        $transaction_id = null;
+
+        $args = array(
+            'post_id' => $order->id,
+            'approve' => 'approve',
+            'type' => ''
+        );
+ 
+        remove_filter( 'comments_clauses', array( 'WC_Comments', 'exclude_order_comments' ) );
+ 
+        $comments = get_comments( $args );
+ 
+        foreach ( $comments as $comment ) {
+          if (strpos($comment->comment_content, 'Transaction ID: ') !== false) {
+            $exploded_comment = explode(": ", $comment->comment_content);
+            $transaction_id = $exploded_comment[1];
+          }
+        }
+ 
+        add_filter( 'comments_clauses', array( 'WC_Comments', 'exclude_order_comments' ) );
+
+        if ( ! $order || ! $transaction_id ) {
+          return false;
+        }
+
+        // Add transaction-specific details to the request
+        $transaction_details = array (
+          'username'      => $this->username,
+          'password'      => $this->password,
+          'type'          => 'refund',
+          'transactionid' => $transaction_id,
+          'ipaddress'     => $_SERVER['REMOTE_ADDR'],
+        );
+
+        if ( ! is_null( $amount ) ) {
+          $transaction_details['amount'] = number_format( $amount, 2, '.', '' );
+        }
+
+        // Send request and get response from server
+        $response = $this->post_and_get_response( $transaction_details );
+
+        // Check response
+        if ( $response['response'] == 1 ) {
+          // Success
+          $order->add_order_note( __( 'Inspire Commerce refund completed. Refund Transaction ID: ' , 'woocommerce' ) . $response['transactionid'] );
+          return true;
+        } else {
+          // Failure
+          $order->add_order_note( __( 'Inspire Commerce refund error. Response data: ' , 'woocommerce' ) . http_build_query($response));
+          return false;
+        }
+      }
+
 
       /**
        * Check if SSL is enabled and notify the user.
@@ -185,7 +252,7 @@ function woocommerce_inspire_commerce_init() {
 						              while( $method != null ) {
 						            ?>
 				                    <p>
-				              			<input type="radio" name="inspire-payment-method" id="<?php echo $i; ?>" value="<?php echo $i; ?>" /> &nbsp;
+				              			<input type="radio" name="inspire-payment-method" id="<?php echo $i; ?>" value="<?php echo $i; ?>" <?php if($i == 0){echo 'checked';}?>/> &nbsp;
 											<?php echo $method->cc_number; ?> (<?php
 				                                  $exp = $method->cc_exp;
 				                                  echo substr( $exp, 0, 2 ) . '/' . substr( $exp, -2 );

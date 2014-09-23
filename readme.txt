@@ -1,10 +1,10 @@
 === WooCommerce Payment Gateway - Inspire ===
-Contributors: innerfire, CoenJacobs, warrenholmes
+Contributors: innerfire, shulmang
 Donate link: http://www.inspirecommerce.com/woocommerce/
 Tags: WooCommerce, Payment, Gateway, Credit Cards, Shopping Cart, Inspire, Inspire Commerce, Extension, Subscriptions, Recurring Billing, Membership
 Requires at least: 3.0.0
-Tested up to: 3.9
-Stable tag: 1.7.4
+Tested up to: 4.0
+Stable tag: 1.7.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -15,8 +15,6 @@ Accept all major credit cards directly on your WooCommerce site via this seamles
 Inspire Commerce is the all-in-one solution that allows you to turn your beautiful WooCommerce backed shopping experience into a selling machine.  This WooCommerce gateway plugin, combined with a [merchant account](http://www.inspirecommerce.com/woocommerce/ "merchant account") from Inspire Commerce, will allow you to accept transactions from all major credit cards including Visa, MasterCard, American Express, Discover, Diners Club, and JCB.  
 
 Using Inspire Commerce's innovative and secure [.pay™ developer framework](http://www.getdotpay.com ".pay"), this plugin supports both card storage as well as integration with the WooCommerce subscriptions module.  Inspire Commerce meets the highest standards of security and reliability and is PCI Level 1 compliant.  
-
-This payment plugin is THE plugin used by WooThemes on their website.  Like their checkout experience?  Have a fully branded checkout on your WooCommerce website, just like the ninjas at WooThemes.
 
 = For US Based Merchants =
 You will need to setup a [credit card processing account with Inspire Commerce](http://www.inspirecommerce.com/woocommerce/ "credit card processing account with Inspire Commerce").  This account will allow you to accept payments from anyone in the world using all major card brands.  There is no processing minimum volume for US based merchants.  Account setup typically takes two to three business days.  Details are available on the [Inspire Commerce website](http://www.inspirecommerce.com/woocommerce/ "Inspire Commerce website").
@@ -71,7 +69,7 @@ __*You can select the radio button next to this option to make it the default ga
 
 == Screenshots ==
 
-1. Easily accept credit card payments on your own branded page.  Here you can see our module in action on WooThemes.com, authors of WooCommerce.
+1. Easily accept credit card payments on your own branded page.
 
 2. Here is a close up of the payment form as seen by your customers (it is fully editable and already branded to perfection for all WooThemes.com themes).  Notice that advanced features such as saving credit cards securely via the Inspire Commerce card vault are available if you choose to activate them in the admin area.  The module even works flawlessly with the WooCommerce subscriptions module.
 
@@ -92,6 +90,12 @@ For security purposes, this plugin requires an active SSL connection via a secur
 Yes.  It works as long as the card vault functionality is activated in the gateway, and is turned on inside the WooCommerce payment gateways settings for Inspire Commerce.
 
 == Changelog ==
+
+= 1.7.5 =
+* WooCommerce 2.2 refund functionality added
+
+= 1.7.4 =
+* Extended subscriptions functionality
 
 = 1.7.3 =
 * Billing email now sends to gateway
