@@ -3,8 +3,8 @@ Contributors: innerfire, shulmang
 Donate link: http://www.inspirecommerce.com/woocommerce/
 Tags: WooCommerce, Payment, Gateway, Credit Cards, Shopping Cart, Inspire, Inspire Commerce, Extension, Subscriptions, Recurring Billing, Membership
 Requires at least: 3.0.0
-Tested up to: 4.0
-Stable tag: 1.7.5
+Tested up to: 4.1.1
+Stable tag: 1.7.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -90,6 +90,9 @@ For security purposes, this plugin requires an active SSL connection via a secur
 Yes.  It works as long as the card vault functionality is activated in the gateway, and is turned on inside the WooCommerce payment gateways settings for Inspire Commerce.
 
 == Changelog ==
+
+= 1.7.6 =
+* WooCommerce 2.1 notice API
 
 = 1.7.5 =
 * WooCommerce 2.2 refund functionality added

@@ -4,7 +4,7 @@
  * Plugin Name: WooCommerce Payment Gateway - Inspire
  * Plugin URI: http://www.inspirecommerce.com/woocommerce/
  * Description: Accept all major credit cards directly on your WooCommerce site in a seamless and secure checkout environment with Inspire Commerce.
- * Version: 1.7.5
+ * Version: 1.7.6
  * Author: innerfire
  * Author URI: http://www.inspirecommerce.com/
  * License: GPL version 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
@@ -451,17 +451,17 @@ function woocommerce_inspire_commerce_init() {
       } else if ( $response['response'] == 2 ) {
         // Decline
         $order->add_order_note( __( 'Inspire Commerce payment failed. Payment declined.', 'woocommerce' ) );
-        $woocommerce->add_error( __( 'Sorry, the transaction was declined.', 'woocommerce' ) );
+        wc_add_notice( __( 'Sorry, the transaction was declined.', 'woocommerce' ), $notice_type = 'error' );
 
       } else if ( $response['response'] == 3 ) {
         // Other transaction error
         $order->add_order_note( __( 'Inspire Commerce payment failed. Error: ', 'woocommerce' ) . $response['responsetext'] );
-        $woocommerce->add_error( __( 'Sorry, there was an error: ', 'woocommerce' ) . $response['responsetext'] );
+        wc_add_notice( __( 'Sorry, there was an error: ', 'woocommerce' ) . $response['responsetext'], $notice_type = 'error' );
 
       } else {
         // No response or unexpected response
         $order->add_order_note( __( "Inspire Commerce payment failed. Couldn't connect to gateway server.", 'woocommerce' ) );
-        $woocommerce->add_error( __( 'No response from payment gateway server. Try again later or contact the site administrator.', 'woocommerce' ) );
+        wc_add_notice( __( 'No response from payment gateway server. Try again later or contact the site administrator.', 'woocommerce' ), $notice_type = 'error' );
 
       }
 
@@ -673,9 +673,8 @@ function woocommerce_inspire_commerce_init() {
           $customer_vault_ids[ $payment_method ] = $new_customer_vault_id;
           update_user_meta( $user->ID, 'customer_vault_ids', $customer_vault_ids );
         }
-        $woocommerce->add_message( __('Successfully updated your information!', 'woocommerce') );
-      } else $woocommerce->add_error( __( 'Sorry, there was an error: ', 'woocommerce') . $response['responsetext'] );
-      $woocommerce->show_messages();
+        wc_add_notice( __('Successfully updated your information!', 'woocommerce'), $notice_type = 'success' );
+      } else wc_add_notice( __( 'Sorry, there was an error: ', 'woocommerce') . $response['responsetext'], $notice_type = 'error' );
 
     }
 
@@ -700,8 +699,7 @@ function woocommerce_inspire_commerce_init() {
           );
         $response = $this->post_and_get_response( $inspire_request );
         if( $response['response'] != 1 ) {
-          $woocommerce->add_error( __( 'Sorry, there was an error: ', 'woocommerce') . $response['responsetext'] );
-          $woocommerce->show_messages();
+          wc_add_notice( __( 'Sorry, there was an error: ', 'woocommerce') . $response['responsetext'], $notice_type = 'error' );
           return;
         }
 
@@ -729,8 +727,7 @@ function woocommerce_inspire_commerce_init() {
       unset( $customer_vault_ids[ $last_method ] );
       update_user_meta( $user->ID, 'customer_vault_ids', $customer_vault_ids );
 
-      $woocommerce->add_message( __('Successfully deleted your information!', 'woocommerce') );
-      $woocommerce->show_messages();
+      wc_add_notice( __('Successfully deleted your information!', 'woocommerce'), $notice_type = 'success' );
 
     }
 
@@ -745,7 +742,7 @@ function woocommerce_inspire_commerce_init() {
 
 			// Check for saving payment info without having or creating an account
 			if ( $this->get_post( 'saveinfo' )  && ! is_user_logged_in() && ! $this->get_post( 'createaccount' ) ) {
-        $woocommerce->add_error( __( 'Sorry, you need to create an account in order for us to save your payment information.', 'woocommerce') );
+        wc_add_notice( __( 'Sorry, you need to create an account in order for us to save your payment information.', 'woocommerce'), $notice_type = 'error' );
         return false;
       }
 
@@ -757,18 +754,18 @@ function woocommerce_inspire_commerce_init() {
 
 			// Check card number
 			if ( empty( $cardNumber ) || ! ctype_digit( $cardNumber ) ) {
-				$woocommerce->add_error( __( 'Card number is invalid.', 'woocommerce' ) );
+				wc_add_notice( __( 'Card number is invalid.', 'woocommerce' ), $notice_type = 'error' );
 				return false;
 			}
 
 			if ( $this->cvv == 'yes' ){
 				// Check security code
 				if ( ! ctype_digit( $cardCSC ) ) {
-					$woocommerce->add_error( __( 'Card security code is invalid (only digits are allowed).', 'woocommerce' ) );
+					wc_add_notice( __( 'Card security code is invalid (only digits are allowed).', 'woocommerce' ), $notice_type = 'error' );
 					return false;
 				}
 				if ( ( strlen( $cardCSC ) != 3 && in_array( $cardType, array( 'Visa', 'MasterCard', 'Discover' ) ) ) || ( strlen( $cardCSC ) != 4 && $cardType == 'American Express' ) ) {
-					$woocommerce->add_error( __( 'Card security code is invalid (wrong length).', 'woocommerce' ) );
+					wc_add_notice( __( 'Card security code is invalid (wrong length).', 'woocommerce' ), $notice_type = 'error' );
 					return false;
 				}
 			}
@@ -782,7 +779,7 @@ function woocommerce_inspire_commerce_init() {
 				 $cardExpirationYear < $currentYear ||
 				 $cardExpirationYear > $currentYear + 20
 			) {
-				$woocommerce->add_error( __( 'Card expiration date is invalid', 'woocommerce' ) );
+				wc_add_notice( __( 'Card expiration date is invalid', 'woocommerce' ), $notice_type = 'error' );
 				return false;
 			}
 
@@ -817,7 +814,7 @@ function woocommerce_inspire_commerce_init() {
 
       // Quit if it didn't work
       if ( is_wp_error( $content ) ) {
-        $woocommerce->add_error( __( 'Problem connecting to server at ', 'woocommerce' ) . GATEWAY_URL . ' ( ' . $content->get_error_message() . ' )' );
+        wc_add_notice( __( 'Problem connecting to server at ', 'woocommerce' ) . GATEWAY_URL . ' ( ' . $content->get_error_message() . ' )', $notice_type = 'error' );
         return null;
       }
 
@@ -855,8 +852,7 @@ function woocommerce_inspire_commerce_init() {
         if ( empty( $ccnumber ) || ! ctype_digit( $ccnumber ) ) {
 
           global $woocommerce;
-          $woocommerce->add_error( __( 'Card number is invalid.', 'woocommerce' ) );
-          $woocommerce->show_messages();
+          wc_add_notice( __( 'Card number is invalid.', 'woocommerce' ), $notice_type = 'error' );
 
         } else {
 
@@ -871,8 +867,7 @@ function woocommerce_inspire_commerce_init() {
             {
 
             global $woocommerce;
-            $woocommerce->add_error( __( 'Card expiration date is invalid', 'woocommerce' ) );
-            $woocommerce->show_messages();
+            wc_add_notice( __( 'Card expiration date is invalid', 'woocommerce' ), $notice_type = 'error' );
 
           } else {
 
